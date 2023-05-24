@@ -32,7 +32,7 @@ void searchByGenre(Game games[], int gameCount) {
     int genreChoice;
     printf("Enter the genre number: ");
     scanf("%d", &genreChoice);
-    getchar(); // Consume newline character
+    getchar(); 
 
     if (genreChoice == 0) {
         return;
@@ -77,6 +77,7 @@ void searchByGenre(Game games[], int gameCount) {
 }
 
 void initializeGames(Game games[], int* gameCount) {
+    // Hard-coded game data for different genres
     Game actionAdventureGames[] = {
         { "Assassin's Creed", "Action-Adventure", 59.99 },
         { "Uncharted", "Action-Adventure", 49.99 },
@@ -91,19 +92,19 @@ void initializeGames(Game games[], int* gameCount) {
 
     Game fpsGames[] = {
         { "Call of Duty: Modern Warfare", "FPS", 59.99 },
-        { "Battlefield 1", "FPS", 39.99 },
-        { "Overwatch", "FPS", 49.99 }
+        { "Battlefield 1", "FPS", 49.99 },
+        { "Overwatch", "FPS", 39.99 }
     };
 
     Game puzzleGames[] = {
-        { "Portal", "Puzzle", 19.99 },
-        { "Tetris", "Puzzle", 9.99 },
-        { "Sudoku", "Puzzle", 5.99 }
+        { "Portal", "Puzzle", 29.99 },
+        { "Tetris", "Puzzle", 19.99 },
+        { "Sudoku", "Puzzle", 9.99 }
     };
 
     Game sportsGames[] = {
-        { "FIFA 21", "Sports", 59.99 },
-        { "NBA 2K21", "Sports", 49.99 },
+        { "FIFA 21", "Sports", 49.99 },
+        { "NBA 2K21", "Sports", 59.99 },
         { "Madden NFL 21", "Sports", 39.99 }
     };
 
