@@ -5,17 +5,17 @@ int main() {
     Game games[MAX_GAMES];
     int gameCount = 0;
 
-    // Hard-coded game names
+
     initializeGames(games, &gameCount);
 
-    // Display the main menu
+
     int choice = 0;
     while (choice != 2) {
         printMainMenu();
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        getchar(); // Consume newline character
+        getchar();
 
         switch (choice) {
         case 1:
