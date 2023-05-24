@@ -15,3 +15,4 @@ void initializeGames(Game games[], int* gameCount);
 void saveGameToFile(Game game);
 
 #endif  // GAMES_H
+
