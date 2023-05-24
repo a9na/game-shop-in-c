@@ -10,8 +10,6 @@ typedef struct {
 } Game;
 
 void printMainMenu();
-void printGenreMenu();
-void printGameMenu();
 void searchByGenre(Game games[], int gameCount);
 void initializeGames(Game games[], int* gameCount);
 void saveGameToFile(Game game);
