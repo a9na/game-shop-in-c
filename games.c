@@ -32,7 +32,7 @@ void searchByGenre(Game games[], int gameCount) {
     int genreChoice;
     printf("Enter the genre number: ");
     scanf("%d", &genreChoice);
-    getchar(); 
+    getchar();
 
     if (genreChoice == 0) {
         return;
@@ -111,7 +111,7 @@ void initializeGames(Game games[], int* gameCount) {
     int genreChoice;
     printf("Enter the genre number: ");
     scanf("%d", &genreChoice);
-    getchar(); // Consume newline character
+    getchar();
 
     if (genreChoice == 0) {
         return;
@@ -143,4 +143,18 @@ void initializeGames(Game games[], int* gameCount) {
         memcpy(games, sportsGames, sizeof(sportsGames));
         break;
     }
+}
+
+void saveGameToFile(Game game) {
+    FILE* file = fopen("games.txt", "a");
+    if (file == NULL) {
+        printf("Error opening file.\n");
+        return;
+    }
+
+    fprintf(file, "Title: %s\n", game.title);
+    fprintf(file, "Genre: %s\n", game.genre);
+    fprintf(file, "Price: $%.2f\n\n", game.price);
+
+    fclose(file);
 }
