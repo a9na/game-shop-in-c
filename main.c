@@ -16,15 +16,15 @@ int main() {
         getchar();
 
         switch (choice) {
-        case 1:
-            searchByGenre(games, gameCount);
-            break;
-        case 2:
-            printf("Exiting the program.\n");
-            break;
-        default:
-            printf("Invalid choice. Please try again.\n");
-            break;
+            case 1:
+                searchByGenre(games, gameCount);
+                break;
+            case 2:
+                printf("Exiting the program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+                break;
         }
     }
 
