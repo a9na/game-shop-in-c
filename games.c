@@ -77,7 +77,7 @@ void searchByGenre(Game games[], int gameCount) {
 }
 
 void initializeGames(Game games[], int* gameCount) {
-    // Hard-coded game data for different genres
+
     Game actionAdventureGames[] = {
         { "Assassin's Creed", "Action-Adventure", 59.99 },
         { "Uncharted", "Action-Adventure", 49.99 },
