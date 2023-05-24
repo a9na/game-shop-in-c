@@ -5,9 +5,7 @@ int main() {
     Game games[MAX_GAMES];
     int gameCount = 0;
 
-
     initializeGames(games, &gameCount);
-
 
     int choice = 0;
     while (choice != 2) {
