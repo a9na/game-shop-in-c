@@ -44,21 +44,21 @@ void searchByGenre(Game games[], int gameCount) {
 
     char genre[50];
     switch (genreChoice) {
-    case 1:
-        strcpy(genre, "Action-Adventure");
-        break;
-    case 2:
-        strcpy(genre, "RPG");
-        break;
-    case 3:
-        strcpy(genre, "FPS");
-        break;
-    case 4:
-        strcpy(genre, "Puzzle");
-        break;
-    case 5:
-        strcpy(genre, "Sports");
-        break;
+        case 1:
+            strcpy(genre, "Action-Adventure");
+            break;
+        case 2:
+            strcpy(genre, "RPG");
+            break;
+        case 3:
+            strcpy(genre, "FPS");
+            break;
+        case 4:
+            strcpy(genre, "Puzzle");
+            break;
+        case 5:
+            strcpy(genre, "Sports");
+            break;
     }
 
     printf("Games in the genre \"%s\":\n", genre);
@@ -73,11 +73,48 @@ void searchByGenre(Game games[], int gameCount) {
 
     if (!gameFound) {
         printf("No games found in the selected genre.\n");
+        return;
+    }
+
+    int gameChoice;
+    printf("Enter the game number to view options: ");
+    scanf("%d", &gameChoice);
+    getchar();
+
+    if (gameChoice < 1 || gameChoice > gameCount) {
+        printf("Invalid game choice. Please try again.\n");
+        return;
+    }
+
+    Game selectedGame = games[gameChoice - 1];
+    printf("Selected game: %s\n", selectedGame.title);
+    printGameMenu();
+
+    int menuChoice;
+    printf("Enter your choice: ");
+    scanf("%d", &menuChoice);
+    getchar();
+
+    switch (menuChoice) {
+        case 0:
+            break;
+        case 1:
+            printf("Added \"%s\" to the cart.\n", selectedGame.title);
+            break;
+        case 2:
+            printf("Added \"%s\" to the wishlist.\n", selectedGame.title);
+            break;
+        case 3:
+            saveGameToFile(selectedGame);
+            printf("Purchased \"%s\". The game has been saved to games.txt.\n", selectedGame.title);
+            break;
+        default:
+            printf("Invalid choice. Please try again.\n");
+            break;
     }
 }
 
 void initializeGames(Game games[], int* gameCount) {
-
     Game actionAdventureGames[] = {
         { "Assassin's Creed", "Action-Adventure", 59.99 },
         { "Uncharted", "Action-Adventure", 49.99 },
@@ -122,26 +159,26 @@ void initializeGames(Game games[], int* gameCount) {
     }
 
     switch (genreChoice) {
-    case 1:
-        *gameCount = sizeof(actionAdventureGames) / sizeof(actionAdventureGames[0]);
-        memcpy(games, actionAdventureGames, sizeof(actionAdventureGames));
-        break;
-    case 2:
-        *gameCount = sizeof(rpgGames) / sizeof(rpgGames[0]);
-        memcpy(games, rpgGames, sizeof(rpgGames));
-        break;
-    case 3:
-        *gameCount = sizeof(fpsGames) / sizeof(fpsGames[0]);
-        memcpy(games, fpsGames, sizeof(fpsGames));
-        break;
-    case 4:
-        *gameCount = sizeof(puzzleGames) / sizeof(puzzleGames[0]);
-        memcpy(games, puzzleGames, sizeof(puzzleGames));
-        break;
-    case 5:
-        *gameCount = sizeof(sportsGames) / sizeof(sportsGames[0]);
-        memcpy(games, sportsGames, sizeof(sportsGames));
-        break;
+        case 1:
+            *gameCount = sizeof(actionAdventureGames) / sizeof(actionAdventureGames[0]);
+            memcpy(games, actionAdventureGames, sizeof(actionAdventureGames));
+            break;
+        case 2:
+            *gameCount = sizeof(rpgGames) / sizeof(rpgGames[0]);
+            memcpy(games, rpgGames, sizeof(rpgGames));
+            break;
+        case 3:
+            *gameCount = sizeof(fpsGames) / sizeof(fpsGames[0]);
+            memcpy(games, fpsGames, sizeof(fpsGames));
+            break;
+        case 4:
+            *gameCount = sizeof(puzzleGames) / sizeof(puzzleGames[0]);
+            memcpy(games, puzzleGames, sizeof(puzzleGames));
+            break;
+        case 5:
+            *gameCount = sizeof(sportsGames) / sizeof(sportsGames[0]);
+            memcpy(games, sportsGames, sizeof(sportsGames));
+            break;
     }
 }
 
