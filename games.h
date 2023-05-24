@@ -14,5 +14,6 @@ void printGenreMenu();
 void printGameMenu();
 void searchByGenre(Game games[], int gameCount);
 void initializeGames(Game games[], int* gameCount);
+void saveGameToFile(Game game);
 
 #endif  // GAMES_H
