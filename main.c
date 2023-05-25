@@ -20,7 +20,7 @@ int main() {
 
 		switch (choice) {
 		case 1:
-			searchByGenre(&games, &gameCount);
+			searchByGenre(&games, &gameCount);   //7   
 			break;
 		case 2:
 			printf("Exiting the program.\n");
@@ -31,7 +31,7 @@ int main() {
 		}
 	}
 
-	free(games);
+	free(games);  //15
 	games = NULL;
 
 	return 0;
