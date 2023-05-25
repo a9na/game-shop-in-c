@@ -1,197 +1,164 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <string.h>
 #include "games.h"
 
 void printMainMenu() {
-    printf("Main Menu:\n");
-    printf("1. Search by genre\n");
-    printf("2. Exit\n");
+	printf("Main Menu:\n");
+	printf("1. Search by genre\n");
+	printf("2. Exit\n");
 }
 
 void printGenreMenu() {
-    printf("Genre Menu:\n");
-    printf("0. Back\n");
-    printf("1. Action-Adventure\n");
-    printf("2. RPG\n");
-    printf("3. FPS\n");
-    printf("4. Puzzle\n");
-    printf("5. Sports\n");
+	printf("Genre Menu:\n");
+	printf("0. Back\n");
+	printf("1. Action-Adventure\n");
+	printf("2. RPG\n");
+	printf("3. FPS\n");
+	printf("4. Puzzle\n");
+	printf("5. Sports\n");
 }
 
 void printGameMenu() {
-    printf("Game Menu:\n");
-    printf("0. Back\n");
-    printf("1. Add to Cart\n");
-    printf("2. Add to Wishlist\n");
-    printf("3. Purchase\n");
+	printf("Game Menu:\n");
+	printf("0. Back\n");
+	printf("1. Add to Cart\n");
+	printf("2. Add to Wishlist\n");
+	printf("3. Purchase\n");
 }
 
-void searchByGenre(Game games[], int gameCount) {
-    printGenreMenu();
+void searchByGenre(Game** games, int* gameCount) {
+	printGenreMenu();
 
-    int genreChoice;
-    printf("Enter the genre number: ");
-    scanf("%d", &genreChoice);
-    getchar();
+	int genreChoice;
+	printf("Enter the genre number: ");
+	scanf("%d", &genreChoice);
+	getchar();
 
-    if (genreChoice == 0) {
-        return;
-    }
-    else if (genreChoice < 1 || genreChoice > 5) {
-        printf("Invalid genre choice. Please try again.\n");
-        return;
-    }
+	if (genreChoice == 0) {
+		return;
+	}
+	else if (genreChoice < 1 || genreChoice > 5) {
+		printf("Invalid genre choice. Please try again.\n");
+		return;
+	}
 
-    char genre[50];
-    switch (genreChoice) {
-        case 1:
-            strcpy(genre, "Action-Adventure");
-            break;
-        case 2:
-            strcpy(genre, "RPG");
-            break;
-        case 3:
-            strcpy(genre, "FPS");
-            break;
-        case 4:
-            strcpy(genre, "Puzzle");
-            break;
-        case 5:
-            strcpy(genre, "Sports");
-            break;
-    }
+	char genre[50];
+	switch (genreChoice) {
+	case 1:
+		strcpy(genre, "Action-Adventure");
+		break;
+	case 2:
+		strcpy(genre, "RPG");
+		break;
+	case 3:
+		strcpy(genre, "FPS");
+		break;
+	case 4:
+		strcpy(genre, "Puzzle");
+		break;
+	case 5:
+		strcpy(genre, "Sports");
+		break;
+	}
 
-    printf("Games in the genre \"%s\":\n", genre);
+	printf("Games in the genre \"%s\":\n", genre);
 
-    int gameFound = 0;
-    for (int i = 0; i < gameCount; i++) {
-        if (strcmp(games[i].genre, genre) == 0) {
-            printf("%d. %s\n", i + 1, games[i].title);
-            gameFound = 1;
-        }
-    }
+	int gameFound = 0;
+	for (int i = 0; i < *gameCount; i++) {
+		if (strcmp((*games)[i].genre, genre) == 0) {
+			printf("%d. %s\n", i + 1, (*games)[i].title);
+			gameFound = 1;
+		}
+	}
 
-    if (!gameFound) {
-        printf("No games found in the selected genre.\n");
-        return;
-    }
+	if (!gameFound) {
+		printf("No games found in the selected genre.\n");
+		return;
+	}
 
-    int gameChoice;
-    printf("Enter the game number to view options: ");
-    scanf("%d", &gameChoice);
-    getchar();
+	int gameChoice;
+	printf("Enter the game number to view options: ");
+	scanf("%d", &gameChoice);
+	getchar();
 
-    if (gameChoice < 1 || gameChoice > gameCount) {
-        printf("Invalid game choice. Please try again.\n");
-        return;
-    }
+	if (gameChoice < 1 || gameChoice >* gameCount) {
+		printf("Invalid game choice. Please try again.\n");
+		return;
+	}
 
-    Game selectedGame = games[gameChoice - 1];
-    printf("Selected game: %s\n", selectedGame.title);
-    printGameMenu();
+	Game selectedGame = (*games)[gameChoice - 1];
+	printf("Selected game: %s\n", selectedGame.title);
+	printGameMenu();
 
-    int menuChoice;
-    printf("Enter your choice: ");
-    scanf("%d", &menuChoice);
-    getchar();
+	int menuChoice;
+	printf("Enter your choice: ");
+	scanf("%d", &menuChoice);
+	getchar();
 
-    switch (menuChoice) {
-        case 0:
-            break;
-        case 1:
-            printf("Added \"%s\" to the cart.\n", selectedGame.title);
-            break;
-        case 2:
-            printf("Added \"%s\" to the wishlist.\n", selectedGame.title);
-            break;
-        case 3:
-            saveGameToFile(selectedGame);
-            printf("Purchased \"%s\". The game has been saved to games.txt.\n", selectedGame.title);
-            break;
-        default:
-            printf("Invalid choice. Please try again.\n");
-            break;
-    }
+	switch (menuChoice) {
+	case 0:
+		break;
+	case 1:
+		printf("Added \"%s\" to the cart.\n", selectedGame.title);
+		break;
+	case 2:
+		printf("Added \"%s\" to the wishlist.\n", selectedGame.title);
+		break;
+	case 3:
+		saveGameToFile(selectedGame);
+		printf("Purchased \"%s\". The game has been saved to games.txt.\n", selectedGame.title);
+		break;
+	default:
+		printf("Invalid choice. Please try again.\n");
+		break;
+	}
 }
 
-void initializeGames(Game games[], int* gameCount) {
-    Game actionAdventureGames[] = {
-        { "Assassin's Creed", "Action-Adventure", 59.99 },
-        { "Uncharted", "Action-Adventure", 49.99 },
-        { "Batman: Arkham Asylum", "Action-Adventure", 39.99 }
-    };
 
-    Game rpgGames[] = {
-        { "The Witcher 3: Wild Hunt", "RPG", 49.99 },
-        { "Final Fantasy XV", "RPG", 59.99 },
-        { "Skyrim", "RPG", 39.99 }
-    };
 
-    Game fpsGames[] = {
-        { "Call of Duty: Modern Warfare", "FPS", 59.99 },
-        { "Battlefield 1", "FPS", 49.99 },
-        { "Overwatch", "FPS", 39.99 }
-    };
+void initializeGames(Game** games, int* gameCount) {
+	*gameCount = MAX_GAMES;
 
-    Game puzzleGames[] = {
-        { "Portal", "Puzzle", 29.99 },
-        { "Tetris", "Puzzle", 19.99 },
-        { "Sudoku", "Puzzle", 9.99 }
-    };
+	*games = (Game*)malloc(sizeof(Game) * (*gameCount));
+	if (*games == NULL) {
+		printf("Memory allocation failed.\n");
+		return;
+	}
 
-    Game sportsGames[] = {
-        { "FIFA 21", "Sports", 49.99 },
-        { "NBA 2K21", "Sports", 59.99 },
-        { "Madden NFL 21", "Sports", 39.99 }
-    };
+	Game allGames[MAX_GAMES] = {
+		{ "Assassin's Creed", "Action-Adventure", 59.99f },
+		{ "Uncharted", "Action-Adventure", 49.99f },
+		{ "Batman: Arkham Asylum", "Action-Adventure", 39.99f },
+		{ "The Witcher 3: Wild Hunt", "RPG", 49.99f },
+		{ "Final Fantasy XV", "RPG", 59.99f },
+		{ "Skyrim", "RPG", 39.99f },
+		{ "Call of Duty: Modern Warfare", "FPS", 59.99f },
+		{ "Battlefield 1", "FPS", 49.99f },
+		{ "Overwatch", "FPS", 39.99f },
+		{ "Portal", "Puzzle", 29.99f },
+		{ "Tetris", "Puzzle", 19.99f },
+		{ "Sudoku", "Puzzle", 9.99f },
+		{ "FIFA 21", "Sports", 49.99f },
+		{ "NBA 2K21", "Sports", 59.99f },
+		{ "Madden NFL 21", "Sports", 39.99f }
+	};
 
-    int genreChoice;
-    printf("Enter the genre number: ");
-    scanf("%d", &genreChoice);
-    getchar();
-
-    if (genreChoice == 0) {
-        return;
-    }
-    else if (genreChoice < 1 || genreChoice > 5) {
-        printf("Invalid genre choice. Please try again.\n");
-        return;
-    }
-
-    switch (genreChoice) {
-        case 1:
-            *gameCount = sizeof(actionAdventureGames) / sizeof(actionAdventureGames[0]);
-            memcpy(games, actionAdventureGames, sizeof(actionAdventureGames));
-            break;
-        case 2:
-            *gameCount = sizeof(rpgGames) / sizeof(rpgGames[0]);
-            memcpy(games, rpgGames, sizeof(rpgGames));
-            break;
-        case 3:
-            *gameCount = sizeof(fpsGames) / sizeof(fpsGames[0]);
-            memcpy(games, fpsGames, sizeof(fpsGames));
-            break;
-        case 4:
-            *gameCount = sizeof(puzzleGames) / sizeof(puzzleGames[0]);
-            memcpy(games, puzzleGames, sizeof(puzzleGames));
-            break;
-        case 5:
-            *gameCount = sizeof(sportsGames) / sizeof(sportsGames[0]);
-            memcpy(games, sportsGames, sizeof(sportsGames));
-            break;
-    }
+	memcpy(*games, allGames, sizeof(Game) * (*gameCount));
 }
+
 
 void saveGameToFile(Game game) {
-    FILE* file = fopen("games.txt", "a");
-    if (file == NULL) {
-        printf("Error opening file.\n");
-        return;
-    }
+	FILE* file = fopen("games.txt", "a");
+	if (file == NULL) {
+		printf("Error opening file.\n");
+		return;
+	}
 
-    fprintf(file, "Title: %s\n", game.title);
-    fprintf(file, "Genre: %s\n", game.genre);
-    fprintf(file, "Price: $%.2f\n\n", game.price);
+	fprintf(file, "Title: %s\n", game.title);
+	fprintf(file, "Genre: %s\n", game.genre);
+	fprintf(file, "Price: $%.2f\n\n", game.price);
 
-    fclose(file);
+	fclose(file);
 }
