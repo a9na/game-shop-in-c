@@ -146,7 +146,7 @@ void initializeGames(Game** games, int* gameCount) {
 
 	memcpy(*games, allGames, sizeof(Game) * (*gameCount));
 }
-
+//16
 void saveGameToFile(Game game) {
 	FILE* file = fopen("games.txt", "a");
 	if (file == NULL) {
