@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "games.h"
 
@@ -116,8 +117,6 @@ void searchByGenre(Game** games, int* gameCount) {
 	}
 }
 
-
-
 void initializeGames(Game** games, int* gameCount) {
 	*gameCount = MAX_GAMES;
 
@@ -147,7 +146,6 @@ void initializeGames(Game** games, int* gameCount) {
 
 	memcpy(*games, allGames, sizeof(Game) * (*gameCount));
 }
-
 
 void saveGameToFile(Game game) {
 	FILE* file = fopen("games.txt", "a");
