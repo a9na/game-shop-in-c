@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+//6
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "games.h"
-
+//8
 void printMainMenu() {
 	printf("Main Menu:\n");
 	printf("1. Search by genre\n");
@@ -28,8 +28,8 @@ void printGameMenu() {
 	printf("2. Add to Wishlist\n");
 	printf("3. Purchase\n");
 }
-
-void searchByGenre(Game** games, int* gameCount) {
+//10 //11
+void searchByGenre(Game** games, int* gameCount) {   //9    //12
 	printGenreMenu();
 
 	int genreChoice;
@@ -83,7 +83,7 @@ void searchByGenre(Game** games, int* gameCount) {
 	printf("Enter the game number to view options: ");
 	scanf("%d", &gameChoice);
 	getchar();
-
+//1
 	if (gameChoice < 1 || gameChoice >* gameCount) {
 		printf("Invalid game choice. Please try again.\n");
 		return;
@@ -118,15 +118,15 @@ void searchByGenre(Game** games, int* gameCount) {
 }
 
 void initializeGames(Game** games, int* gameCount) {
-	*gameCount = MAX_GAMES;
+	*gameCount = MAX_GAMES;      //2
 
 	*games = (Game*)malloc(sizeof(Game) * (*gameCount));
 	if (*games == NULL) {
 		printf("Memory allocation failed.\n");
 		return;
-	}
-
-	Game allGames[MAX_GAMES] = {
+	}   //13   //14
+//3
+	Game allGames[MAX_GAMES] = {    //4
 		{ "Assassin's Creed", "Action-Adventure", 59.99f },
 		{ "Uncharted", "Action-Adventure", 49.99f },
 		{ "Batman: Arkham Asylum", "Action-Adventure", 39.99f },
