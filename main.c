@@ -1,10 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "games.h"
 
 int main() {
-	Game games[MAX_GAMES];
+	Game* games = NULL;
 	int gameCount = 0;
 
 	initializeGames(&games, &gameCount);
@@ -29,6 +30,9 @@ int main() {
 			break;
 		}
 	}
+
+	free(games);
+	games = NULL;
 
 	return 0;
 }
