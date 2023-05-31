@@ -28,6 +28,25 @@ static void printGameMenu() {
     printf("3. Purchase\n");
 }
 
+int compareGames(const void* a, const void* b) {
+    Game* gameA = (Game*)a;
+    Game* gameB = (Game*)b;
+    return strcmp(gameA->title, gameB->title);
+}
+
+void sortGames(Game** games, int gameCount) {
+    qsort(*games, gameCount, sizeof(Game), compareGames);
+}
+
+void renameGameFile(const char* oldName, const char* newName) {
+    int status = rename(oldName, newName);
+    if (status == 0) {
+        printf("File '%s' renamed to '%s'.\n", oldName, newName);
+    } else {
+        printf("Error renaming file '%s' to '%s'.\n", oldName, newName);
+    }
+}
+
 void searchByGenre(Game** games, int* gameCount) {
     printGenreMenu();
 
@@ -114,6 +133,9 @@ void searchByGenre(Game** games, int* gameCount) {
         printf("Invalid choice. Please try again.\n");
         break;
     }
+    
+ sortGames(games, *gameCount);
+ renameGameFile("games.txt", "games_new.txt");
 }
 
 void initializeGames(Game** games, int* gameCount) {
@@ -152,7 +174,14 @@ static void saveGameToFile(Game game) {
         printf("Error opening file.\n");
         return;
     }
+    
+    fseek(file, 0, SEEK_END);  
+    long fileSize = ftell(file);    
 
+    printf("Size of the file: %ld bytes\n", fileSize);
+    
+    rewind(file);
+    
     fprintf(file, "Title: %s\n", game.title);
     fprintf(file, "Genre: %s\n", game.genre);
     fprintf(file, "Price: $%.2f\n\n", game.price);
