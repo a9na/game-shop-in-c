@@ -10,7 +10,7 @@ int main() {
 
 	int choice;
 	do {
-		printMainMenu();
+		printMainMenu();     // 4
 		printf("Enter your choice: ");
 		scanf("%d", &choice);
 		getchar();
@@ -31,6 +31,6 @@ int main() {
 		}
 	} while (choice != 3);
 
-	freeGames(&collection);
+	freeGames(&collection);   
 	return 0;
 }
