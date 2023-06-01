@@ -4,6 +4,8 @@
 #define MAX_GAMES 15
 #define MAX_TITLE_LENGTH 50
 
+// 2 3 7
+
 typedef enum {
 	ACTION_ADVENTURE,
 	RPG,
@@ -32,10 +34,10 @@ void printMainMenu();
 void printGenreMenu();
 void printGameMenu();
 void searchByGenre(GameCollection* collection);
-void searchByTitle(GameCollection* collection);
 void initializeGames(GameCollection* collection);
 void saveGameToFile(Game game);
 void sortGames(GameCollection* collection);
 void renameGameFile(const char* oldName, const char* newName);
+void searchByTitleBinary(GameCollection* collection);
 
 #endif // GAMES_H
