@@ -1,38 +1,36 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "games.h"
 
+
 int main() {
-	Game* games = NULL;
-	int gameCount = 0;
+	GameCollection collection;
+	initializeGames(&collection);
 
-	initializeGames(&games, &gameCount);
-
-	int choice = 0;
-	while (choice != 2) {
+	int choice;
+	do {
 		printMainMenu();
-
 		printf("Enter your choice: ");
 		scanf("%d", &choice);
 		getchar();
 
 		switch (choice) {
 		case 1:
-			searchByGenre(&games, &gameCount);   //7   
+			searchByGenre(&collection);
 			break;
 		case 2:
-			printf("Exiting the program.\n");
+			searchByTitle(&collection);
+			break;
+		case 3:
+			printf("Exiting the program. Goodbye!\n");
 			break;
 		default:
 			printf("Invalid choice. Please try again.\n");
 			break;
 		}
-	}
+	} while (choice != 3);
 
-	free(games);  //15
-	games = NULL;
-
+	freeGames(&collection);
 	return 0;
 }
