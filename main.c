@@ -20,7 +20,7 @@ int main() {
 			searchByGenre(&collection);
 			break;
 		case 2:
-			searchByTitle(&collection);
+			searchByTitleBinary(&collection);
 			break;
 		case 3:
 			printf("Exiting the program. Goodbye!\n");
