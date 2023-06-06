@@ -78,6 +78,7 @@ void renameGameFile(const char* oldName, const char* newName) {
 		printf("Error renaming file '%s' to '%s': %s\n", oldName, newName, strerror(errno));
 	}
 }
+
 // 16 17 19
 void saveGameToFile(Game game) {
 	FILE* file = fopen("games.txt", "a");
@@ -105,7 +106,6 @@ void saveGameToFile(Game game) {
 
 	fclose(file);
 }
-
 
 void searchByGenre(GameCollection* collection) {
 	printGenreMenu();
@@ -204,6 +204,7 @@ void searchByGenre(GameCollection* collection) {
 	sortGames(collection);
 	renameGameFile("games.txt", "games_new.txt");
 }
+
 void searchByTitleBinary(GameCollection* collection) {
 	char searchTitle[MAX_TITLE_LENGTH];
 	printf("Enter the game title: ");
