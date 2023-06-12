@@ -46,7 +46,7 @@ int compareGames(const void* a, const void* b) {
 
 void sortGames(GameCollection* collection) {
 	GameNode* games = collection->head;
-	int gameCount = collection->count;
+	static int gameCount = collection->count;
 	Game* gameArray = (Game*)malloc(sizeof(Game) * gameCount);   // 13 14   
 	if (gameArray == NULL) {
 		printf("Memory allocation failed.\n");
@@ -70,7 +70,7 @@ void sortGames(GameCollection* collection) {
 }
 
 void renameGameFile(const char* oldName, const char* newName) {
-	int status = rename(oldName, newName);    //18
+	static int status = rename(oldName, newName);    //18
 	if (status == 0) {
 		printf("File '%s' renamed to '%s'.\n", oldName, newName);
 	}
@@ -110,7 +110,7 @@ void saveGameToFile(Game game) {
 void searchByGenre(GameCollection* collection) {
 	printGenreMenu();
 
-	int genreChoice;
+	static int genreChoice;
 	printf("Enter the genre number: ");
 	scanf("%d", &genreChoice);
 	getchar();
@@ -145,7 +145,7 @@ void searchByGenre(GameCollection* collection) {
 	printf("Games in the selected genre:\n");
 
 	GameNode* games = collection->head;
-	int gameFound = 0;
+	static int gameFound = 0;
 	for (int i = 0; i < collection->count; i++) {
 		if (games->data.genre == genre) {
 			printf("%d. %s\n", i + 1, games->data.title);
@@ -159,7 +159,7 @@ void searchByGenre(GameCollection* collection) {
 		return;
 	}
 
-	int gameChoice;
+	static int gameChoice;
 	printf("Enter the game number to view options: ");
 	scanf("%d", &gameChoice);
 	getchar();
@@ -178,7 +178,7 @@ void searchByGenre(GameCollection* collection) {
 	printf("Selected game: %s\n", selectedGame.title);
 	printGameMenu();
 
-	int menuChoice;
+	static int menuChoice;
 	printf("Enter your choice: ");
 	scanf("%d", &menuChoice);
 	getchar();
