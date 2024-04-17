@@ -14,3 +14,12 @@ Shopping Cart: Users can add games to their shopping cart for easy checkout.
 Wishlist: Users can create a wishlist of games they are interested in but not yet ready to purchase.
 
 Purchase: Once satisfied with their selection, users can proceed with the purchase of games in their shopping cart.
+
+<br/>
+
+![games](https://github.com/a9na/game-shop-in-c/assets/105394294/f735371f-963e-4a32-b790-0394c25c11c5)
+
+<br/>
+
+![finalGames](https://github.com/a9na/game-shop-in-c/assets/105394294/638f3ced-fc0e-4c52-bdd9-ac44def8cb20)
+
